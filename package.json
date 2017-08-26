@@ -3,7 +3,7 @@
   "displayName": "Open in Browsers",
   "description": "Adds some commands for opening the current file or project in any browser you like, even all of them simultaneously.",
   "icon": "resources/logo-128x128.png",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "out/src/extension.js",
   "publisher": "fabiospampinato",
@@ -72,7 +72,7 @@
     "url": "https://github.com/fabiospampinato/vscode-open-in-browsers.git"
   },
   "engines": {
-    "vscode": "^1.10.0"
+    "vscode": "^1.15.0"
   },
   "keywords": [
     "vscode",

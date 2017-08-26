@@ -4,7 +4,6 @@
 import * as _ from 'lodash';
 import * as absolute from 'absolute';
 import * as openPath from 'open';
-import * as path from 'path';
 import * as vscode from 'vscode';
 import Config from './config';
 import Utils from './utils';
@@ -15,7 +14,7 @@ async function open ( browser?: string | string[] ) {
 
   const {activeTextEditor} = vscode.window,
         editorPath = activeTextEditor ? activeTextEditor.document.fileName : undefined,
-        filePath = editorPath && absolute ( editorPath ) ? editorPath : vscode.workspace.rootPath;
+        filePath = editorPath && absolute ( editorPath ) ? editorPath : Utils.folder.getRootPath ();
 
   if ( !filePath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in a browser' );
 

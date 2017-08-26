@@ -25,6 +25,20 @@ const Utils = {
 
     return Commands;
 
+  },
+
+  folder: {
+
+    getRootPath () {
+
+      const {workspaceFolders} = vscode.workspace;
+
+      if ( !workspaceFolders ) return;
+
+      return workspaceFolders[0].uri.path;
+
+    }
+
   }
 
 };
