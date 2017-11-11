@@ -13,7 +13,7 @@ import Utils from './utils';
 async function open ( browser?: string | string[] ) {
 
   const {activeTextEditor} = vscode.window,
-        editorPath = activeTextEditor ? activeTextEditor.document.fileName : undefined,
+        editorPath = activeTextEditor ? activeTextEditor.document.uri.fsPath : undefined,
         filePath = editorPath && absolute ( editorPath ) ? editorPath : Utils.folder.getRootPath ();
 
   if ( !filePath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in a browser' );
