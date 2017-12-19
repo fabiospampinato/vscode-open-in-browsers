@@ -1,3 +1,6 @@
+### Version 1.1.3
+- Readme: linking to the open utility
+
 ### Version 1.1.2
 - Properly getting the path of the currently active document
 
