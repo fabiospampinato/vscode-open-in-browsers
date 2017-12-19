@@ -39,6 +39,8 @@ It adds 3 commands to the command palette:
 }
 ```
 
+The actual browser's name to use is OS-dependant, for instance if you want to open Firefox under Ubuntu you have to use "firefox" (lowercase) in your settings. We use the [open](https://www.npmjs.com/package/open) utility under the hood, everything that works with it will work here.
+
 ## License
 
 MIT © Fabio Spampinato
