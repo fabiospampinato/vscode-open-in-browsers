@@ -1,3 +1,6 @@
+### Version 1.1.4
+- Updated readme
+
 ### Version 1.1.3
 - Readme: linking to the open utility
 
