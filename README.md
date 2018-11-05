@@ -1,7 +1,7 @@
 # Open in Browsers
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-open-in-browsers/master/resources/logo-128x128.png" alt="Logo">
+	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-open-in-browsers/master/resources/logo.png" width="128" alt="Logo">
 </p>
 
 Adds some commands for opening the current file or project in any browser you like, even all of them simultaneously.
