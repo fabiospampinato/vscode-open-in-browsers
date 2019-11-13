@@ -26,6 +26,8 @@ It adds 3 commands to the command palette:
 
 ## Settings
 
+An example configuration for macOS may look like this:
+
 ```js
 {
   "openInBrowsers.browser": "Google Chrome", // Browser opened via "Open in Default Browser"
@@ -39,7 +41,20 @@ It adds 3 commands to the command palette:
 }
 ```
 
-The actual browser's name to use is OS-dependant, for instance if you want to open Firefox under Ubuntu you have to use "firefox" (lowercase) in your settings. We use the [open](https://www.npmjs.com/package/open) utility under the hood, everything that works with it will work here.
+An example configuration for Windows may look like this:
+
+```js
+{
+  "openInBrowsers.browser": "Google Chrome", // Browser opened via "Open in Default Browser"
+  "openInBrowsers.browsers": [ // Browsers opened via "Open in All Browsers"
+    "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+    "C:/Program Files/Mozilla Firefox/firefox.exe",
+    "C:/Program Files/Opera/launcher.exe"
+  ]
+}
+```
+
+The actual browser's name or path to use is OS-dependant, for instance if you want to open Firefox under Ubuntu you have to use "firefox" (lowercase) in your settings. We use the [open](https://www.npmjs.com/package/open) utility under the hood, everything that works with it will work here.
 
 ## Contributing
 
