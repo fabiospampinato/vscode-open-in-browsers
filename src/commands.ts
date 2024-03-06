@@ -1,56 +1,59 @@
 
 /* IMPORT */
 
-import * as _ from 'lodash';
-import * as absolute from 'absolute';
-import * as openPath from 'open';
-import * as vscode from 'vscode';
-import Config from './config';
-import Utils from './utils';
+import openPath, {apps} from 'open';
+import vscode from 'vscode';
+import {getConfig, getProjectRootPath} from 'vscode-extras';
+import {castArray} from './utils';
 
-/* COMMANDS */
+/* MAIN */
 
-async function open ( browser?: string | string[] ) {
+const open = async ( browsers?: string | string[] ): Promise<void> => {
 
-  const {activeTextEditor} = vscode.window,
-        editorPath = activeTextEditor ? activeTextEditor.document.uri.fsPath : undefined,
-        filePath = editorPath && absolute ( editorPath ) ? editorPath : Utils.folder.getRootPath ();
+  const rootPath = getProjectRootPath ();
+  const filePath = vscode.window.activeTextEditor?.document.uri.fsPath || vscode.window.tabGroups.activeTabGroup.activeTab?.input?.uri?.fsPath;
+  const targetPath = filePath || rootPath;
 
-  if ( !filePath ) return vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in a browser' );
+  if ( !targetPath ) return void vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in a browser' );
 
-  if ( !browser ) {
+  const config = getConfig ( 'openInBrowsers' );
+  const items: vscode.QuickPickItem[] = config?.browsers?.map ( ( label: string ) => ({ label }) ) || [];
 
-    const config = Config.get (),
-          items = config.browsers.map ( label => ({ label }) ),
-          selected = await vscode.window.showQuickPick ( items, { placeHolder: 'Select a browser...' } );
+  browsers ||= ( await vscode.window.showQuickPick ( items, { placeHolder: 'Select a browser...' } ) )?.label;
 
-    if ( !selected ) return;
+  if ( !browsers?.length ) return;
 
-    browser = selected['label'];
+  for ( const browser of castArray ( browsers ) ) {
+
+    let name: string | readonly string[] = browser;
+
+    if ( browser === 'Google Chrome' || browser === 'Chrome' ) name = apps.chrome;
+    if ( browser === 'Firefox' ) name = apps.firefox;
+    if ( browser === 'Edge' ) name = apps.edge;
+
+    openPath ( targetPath, { app: { name } } );
 
   }
 
-  browser = _.castArray ( browser ) as string[];
+};
 
-  browser.forEach ( browser => openPath ( filePath, browser ) );
+const openDefault = (): Promise<void> => {
 
-}
+  const config = getConfig ( 'openInBrowsers' );
+  const browser = config?.browser || 'Chrome';
 
-function openDefault () {
+  return open ( browser );
 
-  const config = Config.get ();
+};
 
-  open ( config.browser );
+const openAll = (): Promise<void> => {
 
-}
+  const config = getConfig ( 'openInBrowsers' );
+  const browsers = config?.browsers || ['Chrome', 'Firefox', 'Safari', 'Edge'];
 
-function openAll () {
+  return open ( browsers );
 
-  const config = Config.get ();
-
-  open ( config.browsers );
-
-}
+};
 
 /* EXPORT */
 

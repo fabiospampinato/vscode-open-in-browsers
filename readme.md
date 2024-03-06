@@ -26,41 +26,19 @@ It adds 3 commands to the command palette:
 
 ## Settings
 
-An example configuration for macOS may look like this:
+An example configuration may look like this:
 
 ```js
 {
-  "openInBrowsers.browser": "Google Chrome", // Browser opened via "Open in Default Browser"
+  "openInBrowsers.browser": "Chrome", // Browser opened via "Open in Default Browser"
   "openInBrowsers.browsers": [ // Browsers opened via "Open in All Browsers"
-    "Google Chrome",
+    "Chrome",
     "Firefox",
     "Safari",
-    "IE",
     "Edge"
   ]
 }
 ```
-
-An example configuration for Windows may look like this:
-
-```js
-{
-  "openInBrowsers.browser": "Google Chrome", // Browser opened via "Open in Default Browser"
-  "openInBrowsers.browsers": [ // Browsers opened via "Open in All Browsers"
-    "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-    "C:/Program Files/Mozilla Firefox/firefox.exe",
-    "C:/Program Files/Opera/launcher.exe"
-  ]
-}
-```
-
-The actual browser's name or path to use is OS-dependant, for instance if you want to open Firefox under Ubuntu you have to use "firefox" (lowercase) in your settings. We use the [open](https://www.npmjs.com/package/open) utility under the hood, everything that works with it will work here.
-
-## Contributing
-
-If you found a problem, or have a feature request, please open an [issue](https://github.com/fabiospampinato/vscode-open-in-browsers/issues) about it.
-
-If you want to make a pull request you can debug the extension using [Debug Launcher](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-debug-launcher).
 
 ## License
 
