@@ -30,12 +30,12 @@ An example configuration may look like this:
 
 ```js
 {
-  "openInBrowsers.browser": "Chrome", // Browser opened via "Open in Default Browser"
+  "openInBrowsers.browser": "chrome", // Browser opened via "Open in Default Browser"
   "openInBrowsers.browsers": [ // Browsers opened via "Open in All Browsers"
-    "Chrome",
-    "Firefox",
-    "Safari",
-    "Edge"
+    "chrome",
+    "firefox",
+    "safari",
+    "edge"
   ]
 }
 ```

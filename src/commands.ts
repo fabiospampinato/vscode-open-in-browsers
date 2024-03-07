@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import openPath, {apps} from 'open';
+import openPath from 'tiny-browser-open';
 import vscode from 'vscode';
 import {getConfig, getProjectRootPath} from 'vscode-extras';
 import {castArray} from './utils';
@@ -23,15 +23,17 @@ const open = async ( browsers?: string | string[] ): Promise<void> => {
 
   if ( !browsers?.length ) return;
 
-  for ( const browser of castArray ( browsers ) ) {
+  for ( const app of castArray ( browsers ) ) {
 
-    let name: string | readonly string[] = browser;
+    if ( app === 'chrome' || app === 'firefox' || app === 'safari' || app === 'edge' ) {
 
-    if ( browser === 'Google Chrome' || browser === 'Chrome' ) name = apps.chrome;
-    if ( browser === 'Firefox' ) name = apps.firefox;
-    if ( browser === 'Edge' ) name = apps.edge;
+      openPath ( targetPath, { app } );
 
-    openPath ( targetPath, { app: { name } } );
+    } else {
+
+      openPath ( targetPath );
+
+    }
 
   }
 
@@ -40,7 +42,7 @@ const open = async ( browsers?: string | string[] ): Promise<void> => {
 const openDefault = (): Promise<void> => {
 
   const config = getConfig ( 'openInBrowsers' );
-  const browser = config?.browser || 'Chrome';
+  const browser = config?.browser || 'chrome';
 
   return open ( browser );
 
@@ -49,7 +51,7 @@ const openDefault = (): Promise<void> => {
 const openAll = (): Promise<void> => {
 
   const config = getConfig ( 'openInBrowsers' );
-  const browsers = config?.browsers || ['Chrome', 'Firefox', 'Safari', 'Edge'];
+  const browsers = config?.browsers || ['chrome', 'firefox', 'safari', 'edge'];
 
   return open ( browsers );
 

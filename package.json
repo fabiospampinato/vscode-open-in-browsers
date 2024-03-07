@@ -15,7 +15,7 @@
         "openInBrowsers.browser": {
           "type": "string",
           "description": "Browser opened via \"Open in Default Browser\"",
-          "default": "Chrome"
+          "default": "chrome"
         },
         "openInBrowsers.browsers": {
           "type": "array",
@@ -24,10 +24,10 @@
           },
           "description": "Browsers opened via \"Open in All Browsers\"",
           "default": [
-            "Chrome",
-            "Firefox",
-            "Safari",
-            "Edge"
+            "chrome",
+            "firefox",
+            "safari",
+            "edge"
           ]
         }
       }
@@ -75,7 +75,7 @@
     "browsers"
   ],
   "dependencies": {
-    "open": "^8.4.2",
+    "tiny-browser-open": "^1.0.1",
     "vscode-extras": "^1.0.1"
   },
   "devDependencies": {
