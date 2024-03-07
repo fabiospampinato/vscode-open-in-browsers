@@ -1,7 +1,8 @@
 
 /* IMPORT */
 
-import openPath from 'tiny-browser-open';
+import openBrowserPath from 'tiny-browser-open';
+import openPath from 'tiny-open';
 import vscode from 'vscode';
 import {getActiveFilePath, getConfig, getProjectRootPath} from 'vscode-extras';
 import {castArray} from './utils';
@@ -25,11 +26,11 @@ const open = async ( browsers?: string | string[] ): Promise<void> => {
 
     if ( app === 'chrome' || app === 'firefox' || app === 'safari' || app === 'edge' ) {
 
-      openPath ( targetPath, { app } );
+      openBrowserPath ( targetPath, { app } );
 
     } else {
 
-      openPath ( targetPath );
+      openPath ( targetPath, { app } );
 
     }
 
