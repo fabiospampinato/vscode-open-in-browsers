@@ -3,16 +3,14 @@
 
 import openPath from 'tiny-browser-open';
 import vscode from 'vscode';
-import {getConfig, getProjectRootPath} from 'vscode-extras';
+import {getActiveFilePath, getConfig, getProjectRootPath} from 'vscode-extras';
 import {castArray} from './utils';
 
 /* MAIN */
 
 const open = async ( browsers?: string | string[] ): Promise<void> => {
 
-  const rootPath = getProjectRootPath ();
-  const filePath = vscode.window.activeTextEditor?.document.uri.fsPath || vscode.window.tabGroups.activeTabGroup.activeTab?.input?.uri?.fsPath;
-  const targetPath = filePath || rootPath;
+  const targetPath = getActiveFilePath () || getProjectRootPath ();
 
   if ( !targetPath ) return void vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in a browser' );
 

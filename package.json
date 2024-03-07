@@ -76,7 +76,7 @@
   ],
   "dependencies": {
     "tiny-browser-open": "^1.0.1",
-    "vscode-extras": "^1.0.1"
+    "vscode-extras": "^1.2.0"
   },
   "devDependencies": {
     "@types/vscode": "^1.87.0",
