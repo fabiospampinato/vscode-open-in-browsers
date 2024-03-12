@@ -1,3 +1,6 @@
+### Version 3.0.2
+- Minor internal improvements
+
 ### Version 3.0.1
 - Ensuring custom browser names are supported, and the default browser is not used instead
 
