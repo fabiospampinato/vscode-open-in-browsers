@@ -1,11 +1,8 @@
 
 /* IMPORT */
 
-import openBrowserPath from 'tiny-browser-open';
-import openPath from 'tiny-open';
-import vscode from 'vscode';
-import {getActiveFilePath, getConfig, getProjectRootPath} from 'vscode-extras';
-import {castArray} from './utils';
+import {alert, getActiveFilePath, getProjectRootPath, openInApp, prompt} from 'vscode-extras';
+import {castArray, getOptions} from './utils';
 
 /* MAIN */
 
@@ -13,26 +10,18 @@ const open = async ( browsers?: string | string[] ): Promise<void> => {
 
   const targetPath = getActiveFilePath () || getProjectRootPath ();
 
-  if ( !targetPath ) return void vscode.window.showErrorMessage ( 'You have to open a project or a file before opening it in a browser' );
+  if ( !targetPath ) return alert.error ( 'You have to open a project or a file before opening it in a browser' );
 
-  const config = getConfig ( 'openInBrowsers' );
-  const items: vscode.QuickPickItem[] = config?.browsers?.map ( ( label: string ) => ({ label }) ) || [];
+  const options = getOptions ();
+  const items = options.browsers.map ( label => ({ label }) );
 
-  browsers ||= ( await vscode.window.showQuickPick ( items, { placeHolder: 'Select a browser...' } ) )?.label;
+  browsers ||= ( await prompt.select ( 'Select a browser...', items ) )?.label;
 
   if ( !browsers?.length ) return;
 
   for ( const app of castArray ( browsers ) ) {
 
-    if ( app === 'chrome' || app === 'firefox' || app === 'safari' || app === 'edge' ) {
-
-      openBrowserPath ( targetPath, { app } );
-
-    } else {
-
-      openPath ( targetPath, { app } );
-
-    }
+    openInApp ( targetPath, app );
 
   }
 
@@ -40,19 +29,17 @@ const open = async ( browsers?: string | string[] ): Promise<void> => {
 
 const openDefault = (): Promise<void> => {
 
-  const config = getConfig ( 'openInBrowsers' );
-  const browser = config?.browser || 'chrome';
+  const options = getOptions ();
 
-  return open ( browser );
+  return open ( options.browser );
 
 };
 
 const openAll = (): Promise<void> => {
 
-  const config = getConfig ( 'openInBrowsers' );
-  const browsers = config?.browsers || ['chrome', 'firefox', 'safari', 'edge'];
+  const options = getOptions ();
 
-  return open ( browsers );
+  return open ( options.browsers );
 
 };
 
